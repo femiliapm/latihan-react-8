@@ -1,4 +1,5 @@
 import "./card.css";
+import PropTypes from "prop-types";
 
 function Card(props) {
   const { imgProd, price, name } = props;
@@ -17,5 +18,11 @@ function Card(props) {
     </div>
   );
 }
+
+Card.propTypes = {
+  imgProd: PropTypes.string,
+  price: PropTypes.string,
+  name: PropTypes.string,
+};
 
 export default Card;
