@@ -9,9 +9,7 @@ const Home = () => {
 
   const getData = async () => {
     try {
-      const data = await axios.get(
-        "http://hplussport.com/api/products/order/price"
-      );
+      const data = await axios.get("http://hplussport.com/api/products");
       console.log(data, "from axios");
       console.log(data.data, "datanya");
       setProducts(data.data);
@@ -39,13 +37,13 @@ const Home = () => {
 
         <section className="prod">
           {/* card product */}
-          <Card
+          {/* <Card
             imgProd={
               "https://images.unsplash.com/photo-1515037893149-de7f840978e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1388&q=80"
             }
             price={`Rp ${100000}`}
             name={"Brownies"}
-          />
+          /> */}
 
           {products.map((p) => {
             return (
@@ -54,6 +52,7 @@ const Home = () => {
                 imgProd={p.image}
                 price={p.price}
                 name={p.name}
+                id={p.id}
               />
             );
           })}

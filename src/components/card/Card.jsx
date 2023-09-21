@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./card.css";
 import PropTypes from "prop-types";
 
 function Card(props) {
-  const { imgProd, price, name } = props;
+  const { id, imgProd, price, name } = props;
 
   return (
     <div className="card-container">
@@ -11,15 +12,16 @@ function Card(props) {
         <p>{price}</p>
       </div>
       <div className="desc">
-        <a href="#">
+        <Link to={`/prod/${id}`}>
           <p>{name}</p>
-        </a>
+        </Link>
       </div>
     </div>
   );
 }
 
 Card.propTypes = {
+  id: PropTypes.string,
   imgProd: PropTypes.string,
   price: PropTypes.string,
   name: PropTypes.string,
