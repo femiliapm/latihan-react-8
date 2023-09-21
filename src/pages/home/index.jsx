@@ -9,12 +9,14 @@ const Home = () => {
 
   const getData = async () => {
     try {
-      const data = await axios.get("http://hplussport.com/api/products");
+      const data = await axios.get(
+        "https://ecommerce-api-dummy-a441c517136b.herokuapp.com/v1/api/products"
+      );
       console.log(data, "from axios");
       console.log(data.data, "datanya");
       setProducts(data.data);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -37,26 +39,30 @@ const Home = () => {
 
         <section className="prod">
           {/* card product */}
-          <Card
+          {/* <Card
             imgProd={
               "https://images.unsplash.com/photo-1515037893149-de7f840978e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1388&q=80"
             }
             price={`Rp ${100000}`}
             name={"Brownies"}
             id={"1"}
-          />
+          /> */}
 
-          {products.map((p) => {
-            return (
-              <Card
-                key={p.id}
-                imgProd={p.image}
-                price={p.price}
-                name={p.name}
-                id={p.id}
-              />
-            );
-          })}
+          {products ? (
+            products.map((p) => {
+              return (
+                <Card
+                  key={p.id}
+                  imgProd={p.image}
+                  price={`Rp ${p.price}`}
+                  name={p.name}
+                  id={p.id}
+                />
+              );
+            })
+          ) : (
+            <p>No Data!</p>
+          )}
         </section>
       </main>
     </div>

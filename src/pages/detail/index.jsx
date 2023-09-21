@@ -10,7 +10,7 @@ const DetailProduct = () => {
   const getProductById = useCallback(async () => {
     try {
       const res = await axios.get(
-        `https://hplussport.com/api/products?id=${id}`
+        `https://ecommerce-api-dummy-a441c517136b.herokuapp.com/v1/api/products?id=${id}`
       );
       localStorage.setItem("idProduct", id);
       setProduct(res.data[0]);
