@@ -26,13 +26,21 @@ const DetailProduct = () => {
   return (
     <div className="detail-container">
       <div className="detail-img">
-        <img src={product.image} alt={product.name} />
+        <img
+          src={
+            product?.image ||
+            "https://images.unsplash.com/photo-1515037893149-de7f840978e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1388&q=80"
+          }
+          alt={product?.name || "Brownies"}
+        />
       </div>
-      <div className="detail-price">Rp {product.price}</div>
+      <div className="detail-price">Rp {product?.price || 100000}</div>
       <div className="detail-name" style={{ fontWeight: 700 }}>
-        {product.name}
+        {product?.name || "Brownies"}
       </div>
-      <div className="detail-desc">{product.description}</div>
+      <div className="detail-desc">
+        {product?.description || "Brownies homemade yang enak sekali~"}
+      </div>
     </div>
   );
 };

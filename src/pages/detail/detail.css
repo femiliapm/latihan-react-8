@@ -9,6 +9,8 @@
 
 .detail-img img {
   width: 500px;
+  max-height: 500px;
+  object-fit: cover;
 }
 
 .detail-desc {

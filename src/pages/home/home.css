@@ -30,4 +30,5 @@ input:focus {
 .prod {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
