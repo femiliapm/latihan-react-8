@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import "./detail.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 const DetailProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
 
-  const getProductById = async () => {
+  const getProductById = useCallback(async () => {
     try {
       const res = await axios.get(
         `https://hplussport.com/api/products?id=${id}`
@@ -17,11 +17,11 @@ const DetailProduct = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     getProductById();
-  }, []);
+  }, [getProductById]);
 
   return (
     <div className="detail-container">
