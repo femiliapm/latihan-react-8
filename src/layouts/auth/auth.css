@@ -1,0 +1,13 @@
+.auth-wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.auth-wrapper .left {
+  width: 60%;
+  padding: 30px;
+}
+
+.auth-wrapper .right {
+  flex: 1;
+}
