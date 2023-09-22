@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="navbar-container">
       <div className="logo">
         <Link to={"/"}>Home</Link>
-        <Link to={"/add"}>Add Product</Link>
+        <Link to={"/add-product"}>Add Product</Link>
       </div>
       <div className="btn-group">
         <Link to={"/login"} className="btn-login">

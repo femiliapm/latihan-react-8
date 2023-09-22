@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import DetailProduct from "./pages/detail";
 import AddProduct from "./pages/addProduct";
 import LayoutAuth from "./layouts/auth";
+import EditProduct from "./pages/editProduct";
 
 function Router() {
   return (
@@ -10,7 +11,8 @@ function Router() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<DetailProduct />} />
-        <Route path="/add" element={<AddProduct />} />
+        <Route path="/edit-product/:id" element={<EditProduct />} />
+        <Route path="/add-product" element={<AddProduct />} />
         <Route path="/layout" element={<LayoutAuth />} />
       </Routes>
     </BrowserRouter>

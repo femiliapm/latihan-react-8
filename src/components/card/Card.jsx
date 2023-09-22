@@ -12,9 +12,13 @@ function Card(props) {
         <p>{price}</p>
       </div>
       <div className="desc">
-        <Link to={`/product/${id}`}>
-          <p>{name}</p>
-        </Link>
+        {/* <Link to={`/product/${id}`}> */}
+        <p>{name}</p>
+        {/* </Link> */}
+      </div>
+      <div className="action d-flex justify-content-between">
+        <Link to={`/product/${id}`}>See Detail</Link>
+        <Link to={`/edit-product/${id}`}>Update Data</Link>
       </div>
     </div>
   );

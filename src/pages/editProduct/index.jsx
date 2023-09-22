@@ -1,19 +1,21 @@
-import { useState } from "react";
-import LayoutV1 from "../../layouts/v1";
-import { addProduct } from "../../services/product";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import FormProduct from "../../components/formAddEditProduct/FormProduct";
-import { useNavigate } from "react-router-dom";
+import LayoutV1 from "../../layouts/v1";
+import { getProductsById, updateProduct } from "../../services/product";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [imgTitle, setImgTitle] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [desc, setDesc] = useState("");
 
+  const { id } = useParams();
+
   const navigate = useNavigate();
 
-  const saveData = async (e) => {
+  const updateData = async (e) => {
     try {
       e.preventDefault();
 
@@ -25,12 +27,9 @@ const AddProduct = () => {
         description: desc,
       };
 
-      console.log(data);
-
-      const res = await addProduct(data);
-
-      console.log(res);
-      alert(res.data);
+      const response = await updateProduct(id, data);
+      console.log(response);
+      alert(response.data);
       setDesc("");
       setImgTitle("");
       setImgUrl("");
@@ -39,13 +38,33 @@ const AddProduct = () => {
 
       navigate("/");
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
     }
   };
 
+  const getProductById = async (idProduct) => {
+    try {
+      // find data berdasarkan id yg dikirim
+      const response = await getProductsById(idProduct);
+      console.log(response);
+      const data = response.data[0];
+      setDesc(data.description);
+      setImgTitle(data.imageTitle);
+      setImgUrl(data.image);
+      setName(data.name);
+      setPrice(data.price);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProductById(id);
+  }, [id]);
+
   return (
     <LayoutV1>
-      <h2>Add Product</h2>
+      <h2>Edit Product</h2>
       <FormProduct
         name={name}
         price={price}
@@ -58,11 +77,11 @@ const AddProduct = () => {
         onChangeImageUrl={(e) => setImgUrl(e.target.value)}
         onChangeDesc={(e) => setDesc(e.target.value)}
       />
-      <button className="btn btn-success" onClick={(e) => saveData(e)}>
-        Save
+      <button className="btn btn-success" onClick={(e) => updateData(e)}>
+        Update
       </button>
     </LayoutV1>
   );
 };
 
-export default AddProduct;
+export default EditProduct;
