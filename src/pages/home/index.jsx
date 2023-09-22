@@ -1,22 +1,23 @@
-import "./home.css";
-import Navbar from "../../components/navbar/Navbar";
-import Card from "../../components/card/Card";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import Card from "../../components/card/Card";
+import LayoutV1 from "../../layouts/v1";
+import { getProducts } from "../../services/product";
+import "./home.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [searchVal, setSearchValue] = useState("");
+  // const [prodSearch, setProdSearch] = useState([]);
 
   const getData = async () => {
     try {
-      const data = await axios.get(
-        "https://ecommerce-api-dummy-a441c517136b.herokuapp.com/v1/api/products"
-      );
+      const data = await getProducts();
       console.log(data, "from axios");
-      console.log(data.data, "datanya");
+      // console.log(data.data, "datanya");
       setProducts(data.data);
+      return data.data;
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
@@ -24,22 +25,43 @@ const Home = () => {
     getData();
   }, []);
 
-  return (
-    <div className="container">
-      {/* navbar */}
-      <Navbar />
-      {/* main section */}
-      <main>
-        <section className="header">
-          <h2>Products</h2>
-          <div className="input">
-            <input type="text" name="search" id="search" />
-          </div>
-        </section>
+  // const searchProduct = () => {
+  //   if (searchVal === "") {
+  //     const data = getData();
+  //     setProducts(data);
+  //     return;
+  //   }
 
-        <section className="prod">
-          {/* card product */}
-          {/* <Card
+  //   setProducts(result);
+  // };
+
+  const result = products.filter((product) =>
+    product.name.toLowerCase().includes(searchVal.toLowerCase())
+  );
+
+  return (
+    <LayoutV1>
+      {/* isi di dalam sini akan masuk sebagai children */}
+
+      <section className="header">
+        <h2>Products</h2>
+        <div className="input">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            value={searchVal}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          {/* <button className="btn btn-info" onClick={searchProduct}>
+            Search
+          </button> */}
+        </div>
+      </section>
+
+      <section className="prod">
+        {/* card product */}
+        {/* <Card
             imgProd={
               "https://images.unsplash.com/photo-1515037893149-de7f840978e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1388&q=80"
             }
@@ -48,24 +70,23 @@ const Home = () => {
             id={"1"}
           /> */}
 
-          {products ? (
-            products.map((p) => {
-              return (
-                <Card
-                  key={p.id}
-                  imgProd={p.image}
-                  price={`Rp ${p.price}`}
-                  name={p.name}
-                  id={p.id}
-                />
-              );
-            })
-          ) : (
-            <p>No Data!</p>
-          )}
-        </section>
-      </main>
-    </div>
+        {products ? (
+          result.map((p) => {
+            return (
+              <Card
+                key={p.id}
+                imgProd={p.image}
+                price={`Rp ${p.price}`}
+                name={p.name}
+                id={p.id}
+              />
+            );
+          })
+        ) : (
+          <p>No Data!</p>
+        )}
+      </section>
+    </LayoutV1>
   );
 };
 

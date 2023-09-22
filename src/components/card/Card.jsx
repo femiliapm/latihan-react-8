@@ -12,7 +12,7 @@ function Card(props) {
         <p>{price}</p>
       </div>
       <div className="desc">
-        <Link to={`/prod/${id}`}>
+        <Link to={`/product/${id}`}>
           <p>{name}</p>
         </Link>
       </div>
