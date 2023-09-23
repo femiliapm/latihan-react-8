@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LayoutV1 from "../../layouts/v1";
 import "./detail.css";
-import { getProductsById } from "../../services/product";
+import { deleteProduct, getProductsById } from "../../services/product";
 
 const DetailProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const navigate = useNavigate();
 
   const getProductById = useCallback(async () => {
     try {
@@ -21,6 +22,20 @@ const DetailProduct = () => {
   useEffect(() => {
     getProductById();
   }, [getProductById]);
+
+  // bisa tambahkan konfirmasi sebelum benar2 dihapus
+  const deleteProductById = async (e) => {
+    try {
+      e.preventDefault();
+
+      const res = await deleteProduct(id);
+      console.log(res);
+      alert(res.data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <LayoutV1>
@@ -41,6 +56,13 @@ const DetailProduct = () => {
         <div className="detail-desc">
           {product?.description || "Brownies homemade yang enak sekali~"}
         </div>
+
+        <button
+          className="btn btn-danger mt-3"
+          onClick={(e) => deleteProductById(e)}
+        >
+          Delete
+        </button>
       </div>
     </LayoutV1>
   );
