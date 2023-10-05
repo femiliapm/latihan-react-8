@@ -7,6 +7,7 @@ function Navbar() {
       <div className="logo">
         <Link to={"/"}>Home</Link>
         <Link to={"/add-product"}>Add Product</Link>
+        <Link to={"/chart-example"}>Chart Example</Link>
       </div>
       <div className="btn-group">
         <Link to={"/login"} className="btn-login">

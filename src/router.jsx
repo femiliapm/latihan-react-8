@@ -4,6 +4,7 @@ import DetailProduct from "./pages/detail";
 import AddProduct from "./pages/addProduct";
 import LayoutAuth from "./layouts/auth";
 import EditProduct from "./pages/editProduct";
+import ChartPage from "./pages/chartExample";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
         <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/layout" element={<LayoutAuth />} />
+        <Route path="/chart-example" element={<ChartPage />} />
       </Routes>
     </BrowserRouter>
   );
